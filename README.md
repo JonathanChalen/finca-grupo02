@@ -1,22 +1,13 @@
 # Proyecto Finca - Grupo 02
 
-## 1. Integrantes y roles
+## 1. Integrantes
 
-| Integrante | Rol |
-|---|---|
-| Jonathan Chalen | Desarrollo y pruebas |
-| Integrante 2 | Responsable de documentación |
-| Integrante 3 | Responsable de pruebas |
-| Integrante 4 | Desarrollo e integración |
-
-## 2. Versiones de las herramientas
-
-| Integrante | Java | Git | IntelliJ IDEA |
-|---|---|---|---|
-| Jonathan Chalen | 21.0.12.1 LTS (Temurin) | 2.56.0.windows.2 | 2026.2.3 |
-| Integrante 2 | Pendiente | Pendiente | Pendiente |
-| Integrante 3 | Pendiente | Pendiente | Pendiente |
-| Integrante 4 | Pendiente | Pendiente | Pendiente |
+| Integrantes |
+|--|
+| Jonathan Chalen Parraga
+| Cristian Alejandro Choez Cumbe |
+| Jhonny Arellano|
+| pendiente |
 
 ## 3. Descripción del proyecto
 
@@ -43,6 +34,6 @@ Durante el desarrollo se presentó un inconveniente al configurar la dirección 
 
 ## 7. Repositorio
 
-Enlace: [Repositorio Finca - Grupo 02](https://github.com/JonathanChalen/finca-grupo02.)
+Enlace: [Repositorio Finca - Grupo 02](https://github.com/JonathanChalen/finca-grupo02)
 
 El repositorio es privado y el acceso depende de los permisos concedidos a sus colaboradores.
