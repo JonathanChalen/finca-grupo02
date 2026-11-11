@@ -11,7 +11,7 @@
 
 El proyecto Finca permite representar parcelas agrícolas mediante la clase `Parcela` y calcular su área en metros cuadrados a partir de la cantidad de hectáreas.
 
-Además, se incorpora el módulo AquaSense, orientado a representar información de una producción acuícola, gestionar productos y generar alertas cuando se presentan condiciones que requieren atención.
+También incluye AquaSense, un módulo orientado a gestionar productos acuícolas y generar alertas sobre las condiciones del agua.
 
 ## 3. Instrucciones para ejecutar las pruebas
 
@@ -20,79 +20,78 @@ Además, se incorpora el módulo AquaSense, orientado a representar información
 3. Esperar a que Maven cargue las dependencias.
 4. Abrir el panel Maven.
 5. Ejecutar `Lifecycle → clean` y después `Lifecycle → verify`.
-6. Verificar que la ejecución termine con el resultado `BUILD SUCCESS`.
+6. Comprobar que aparezca `BUILD SUCCESS`.
 
 ## 4. Clases de prueba
 
-El proyecto incluye la clase `ParcelaTest`, que comprueba el cálculo del área y el rechazo de cantidades de hectáreas no positivas.
+El proyecto incluye las siguientes pruebas:
 
-También incluye `ParcelaChalenTest`, que verifica que una parcela de 4 hectáreas equivale a 40 000 metros cuadrados.
-
-Para el módulo AquaSense se incorporaron las siguientes pruebas:
-
+- `ParcelaTest`: comprueba el cálculo del área y las validaciones.
+- `ParcelaChalenTest`: verifica que una parcela de 4 hectáreas equivale a 40 000 metros cuadrados.
 - `FabricaProductosTest`: comprueba la creación de productos mediante Factory.
-- `MotorAlertasTest`: verifica la notificación de los observadores.
-- `ReglasAquaSenseTest`: comprueba las condiciones de las tres reglas de alertas.
+- `MotorAlertasTest`: verifica las notificaciones de los observadores.
+- `ReglasAquaSenseTest`: comprueba las condiciones de las reglas de alertas.
 
 En total, se ejecutaron 14 pruebas con 0 errores y 0 fallos.
 
 ## 5. Dificultades encontradas y soluciones
 
-Durante el desarrollo se presentó un inconveniente al configurar la dirección del repositorio remoto de GitHub. Se corrigió la dirección para que coincidiera con el nombre del repositorio y se logró publicar el proyecto correctamente.
-
-También se presentaron ajustes en la organización de los paquetes y clases del módulo AquaSense. Finalmente, se ejecutaron las pruebas desde IntelliJ IDEA mediante Maven y se obtuvo el resultado `BUILD SUCCESS`.
+Durante el desarrollo se presentaron inconvenientes con la configuración del repositorio remoto y la organización de algunos paquetes. Se realizaron los ajustes necesarios y se verificó el funcionamiento del proyecto mediante las pruebas de Maven.
 
 ## 6. Repositorio
 
-Enlace: [Repositorio Finca - Grupo 02](https://github.com/JonathanChalen/finca-grupo02)
+[Repositorio Finca - Grupo 02](https://github.com/JonathanChalen/finca-grupo02)
 
 El repositorio es privado y el acceso depende de los permisos concedidos a sus colaboradores.
 
-## 7. Taller 4 - Principios SOLID, Factory y Observer
+## 7. Diagnóstico del código actual
 
-En este taller se desarrolló el módulo AquaSense, aplicando principios de programación orientada a objetos y patrones de diseño.
+| Pregunta | Respuesta del grupo |
+|---|---|
+| ¿Qué clase tiene más de un motivo para cambiar? | La clase Demo, porque crea objetos, realiza operaciones y muestra resultados en consola. |
+| ¿Dónde se usa `new` directamente sobre los records del dominio? | En Demo.java, donde se crean objetos Producto, Cultivo y Animal. |
+| ¿Hay umbrales o tarifas escritos como números sueltos dentro de una regla? | En el diagnóstico inicial todavía no existían reglas de alertas. |
+| ¿Hay alguna herencia que exista solo para reutilizar código? | No. El proyecto utiliza la interfaz sellada Activo, implementada por los records del dominio. |
 
-### 7.1. Productos del módulo AquaSense
+## 8. Taller 4 - SOLID, Factory y Observer
 
-Se crearon tres tipos de productos:
+Se desarrolló el módulo AquaSense para gestionar productos acuícolas y generar alertas cuando las condiciones del agua salen de los límites configurados.
 
-- `BiomasaPiscina`: representa la información de una piscina acuícola.
+### Productos del módulo
+
+- `BiomasaPiscina`: representa información de una piscina acuícola.
 - `LoteCamaron`: representa un lote de camarones.
 - `InsumoAcuicola`: representa los insumos utilizados en la producción.
 
 También se implementó la interfaz `Trazable` para generar códigos de identificación.
 
-### 7.2. Patrón Factory
+### Patrones de diseño aplicados
 
-Se implementó la clase `FabricaProductos`, encargada de crear los productos y generar sus códigos automáticamente.
+- **Factory:** la clase `FabricaProductos` se encarga de crear los productos y generar sus códigos.
+- **Observer:** `MotorAlertas` notifica cuando se genera una alerta mediante `ObservadorConsola` y `ObservadorLista`.
 
-### 7.3. Patrón Observer
+### Principios SOLID
 
-Se implementó un sistema de alertas con dos observadores:
+- **SRP:** cada clase tiene una responsabilidad específica.
+- **OCP:** permite agregar nuevas reglas sin modificar el motor de alertas.
+- **LSP:** los productos implementan la interfaz `Trazable`.
+- **ISP:** las interfaces tienen métodos específicos.
+- **DIP:** `MotorAlertas` trabaja con las abstracciones `ReglaAlerta` y `ObservadorAlertas`.
 
-- `ObservadorConsola`: muestra las alertas en la consola.
-- `ObservadorLista`: almacena las alertas generadas.
-
-### 7.4. Reglas de alertas
+### Reglas de alerta
 
 El sistema cuenta con tres reglas configurables:
 
-- Oxígeno bajo: detecta cuando el oxígeno disuelto está por debajo del mínimo establecido.
+- Oxígeno bajo: detecta cuando el oxígeno está por debajo del mínimo establecido.
 - Salinidad fuera de rango: detecta cuando la salinidad está fuera de los límites configurados.
 - Temperatura alta: detecta cuando la temperatura supera el máximo establecido.
 
-### 7.5. Principios SOLID
+Los límites se reciben mediante parámetros para permitir su configuración.
 
-Durante el desarrollo se aplicaron los principios SOLID para organizar mejor las responsabilidades de las clases, facilitar la ampliación del sistema y reducir las dependencias directas.
+### Pruebas y documentación
 
-### 7.6. Pruebas y documentación
+Se utilizaron pruebas unitarias con JUnit 5 para comprobar la creación de productos, las reglas de alertas y las notificaciones del motor.
 
-Se utilizaron pruebas unitarias con JUnit 5 para comprobar el funcionamiento de la fábrica y las reglas de alertas.
+La ejecución de `clean verify` finalizó correctamente con 14 pruebas aprobadas.
 
-También se elaboró un diagrama UML para representar las clases y sus relaciones.
-
-El diagrama se encuentra en:
-
-`docs/diagrama-uml.md`
-
-La ejecución de Maven mediante `clean verify` finalizó correctamente con 14 pruebas aprobadas.
+El diagrama UML se encuentra en `docs/diagrama-uml.md`.
